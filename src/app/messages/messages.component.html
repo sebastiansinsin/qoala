@@ -1,0 +1,8 @@
+<div class="wrapper">
+    <aside *ngIf="messages">
+        <div class="notification is-danger">
+            <button class="delete" (click)="dismiss()"></button>
+            {{messages}}
+        </div>
+    </aside>
+</div>

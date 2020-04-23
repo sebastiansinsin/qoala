@@ -1,0 +1,41 @@
+<div class="level column is-mobile">
+    <div class="level-left column">
+        <h1 class="title is-4">Qoala Test</h1>
+    </div>
+    <div class="level-right column">
+        <div class="buttons">
+            <button class="button is-primary" (click)="fieldSort='color'">Color</button>
+            <button class="button is-link" (click)="fieldSort='city'">City</button>
+        </div>
+    </div>
+</div>
+
+<div #slideContainer class="scrolling-wrapper-flexbox">
+    <div *ngFor="let document of documents | sort : fieldSort" class="card"
+        [ngStyle]="{'background-color' : document.color}">
+        <div class="card-content">
+            <div class="container">
+                <figure class="image is-128x128" style="margin-left:auto;margin-right:auto">
+                    <img src="{{document.picture.large}}" alt="Placeholder image">
+                </figure>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="media-content">
+                <p class="title is-4">{{document.name.title}} {{document.name.first}} {{document.name.last}}</p>
+                <p class="subtitle is-4">{{document.dob.age}}</p>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="media-content">
+                <p class="subtitle is-4">{{document.location.city}}, {{document.location.state}}
+                    {{document.location.postcode}}</p>
+            </div>
+        </div>
+        <div class="card-content">
+            <div class="media-content">
+                <p class="subtitle is-4">{{document.email}}</p>
+            </div>
+        </div>
+    </div>
+</div>
