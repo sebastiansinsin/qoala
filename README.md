@@ -1,2 +1,0 @@
-# qoala
-qoala FE test
