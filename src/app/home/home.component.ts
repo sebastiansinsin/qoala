@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
           }
         }
       );
-      console.log('this.documents', this.documents);
     }
   }
 
@@ -43,8 +42,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (!this.documents) {
       this.homeService.getDocuments(this.rows).subscribe(
         response => {
-
-
           this.documents = response.results;
           this.documents.map(
             val => {
@@ -66,7 +63,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
               }
             }
           );
-          console.log(this.documents);
         }
       );
     }
@@ -74,11 +70,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // tslint:disable-next-line: variable-name
+    /**
+     * TODO :
+     *  get scroll event for mobile view
+     *  notes:
+     *  for now, don't know why need to use window for mobile view
+     */
     window.addEventListener('scroll', (event) => {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const scrolled = window.scrollY;
       if (Math.ceil(scrolled) === scrollable) {
-        console.log('you\'ve reached the bottom');
         this.rows += 10;
         this.homeService.getDocuments(this.rows).subscribe(
           response => {
@@ -108,6 +109,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         );
       }
     }, false);
+    /**
+     * TODO :
+     *  select the container which scroll both x and y axis
+     *  notes:
+     *  however can't get the scroll event when y axis on mobile view
+     */
     this.sliderContainer.nativeElement.addEventListener('scroll', (event) => {
       if (parseInt(event.target.offsetWidth, 10) + parseInt(event.target.scrollLeft, 10) === parseInt(event.target.scrollWidth, 10)) {
         this.rows += 10;
@@ -135,7 +142,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
               }
             );
             localStorage.setItem('documents', JSON.stringify(this.documents));
-            console.log('you\'ve reached the bottom 2');
           }
         );
       }
